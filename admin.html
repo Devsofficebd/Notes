@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Add Note</h1>
+    <form id="noteForm">
+      <input type="text" id="title" placeholder="Title" required /><br>
+      <input type="text" id="category" placeholder="Category" required /><br>
+      <textarea id="content" placeholder="Content" required></textarea><br>
+      <button type="submit">Add Note</button>
+    </form>
+    <div id="status"></div>
+  </div>
+  <script src="js/api.js"></script>
+  <script>
+    document.getElementById('noteForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const category = document.getElementById('category').value;
+      const content = document.getElementById('content').value;
+      const result = await addNote({ title, category, content });
+      document.getElementById('status').innerText = result ? "Note added!" : "Error adding note.";
+    });
+  </script>
+</body>
+</html>
